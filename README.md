@@ -1,7 +1,6 @@
 ## Laravel Microsoft Teams Connector
 
-A Laravel 5 package to send notifications to Microsoft Teams by using "Incoming Webhook". The aim of this package is to create your own cards and simply send notifications to your desired channel.
-
+A Laravel 5 package to send notifications to Microsoft Teams by using "Incoming Webhook". 
 This package also contains a card to send a Laravel Forge deployment notification, because Microsoft Teams notification is not supported at the moment. The cards in this package only use the old MessageCard format, because AdpativeCard is not supported by Microsoft Teams at the moment. I will update the card format, when AdpativeCard format is supported.
 
 ![Forge card](https://preview.ibb.co/dFzDR8/forge_card.png)
@@ -19,13 +18,13 @@ If you are using Laravel 5.5 and up, the service provider will automatically get
 For older versions of Laravel (<5.5), you have to add the service provider and alias to config/app.php:
 
 ```php
-    Sebbmyr\Teams\TeamsConnectorServiceProvider::class,
+    Sebbmyr\LaravelTeams\TeamsConnectorServiceProvider::class,
 ```
 
 You can optionally use the facade for shorter code. Add this to your facades:
 
 ```php
-    'TeamsConnector' => Sebbmyr\Teams\Facades\TeamsConnector::class,
+    'TeamsConnector' => Sebbmyr\LaravelTeams\Facades\TeamsConnector::class,
 ```
 
 
@@ -34,7 +33,7 @@ You can optionally use the facade for shorter code. Add this to your facades:
 For this package to work, you need to configure an "Incomming Webhook" connector in your targeted Teams channel and copy the url into a config file that you can publish like this:
 
 ```bash
-php artisan vendor:publish --provider="Sebbmyr\Teams\TeamsConnectorServiceProvider"
+php artisan vendor:publish --provider="Sebbmyr\LaravelTeams\TeamsConnectorServiceProvider"
 ```
 
 ... or you simple add the following to your `.env` file:
@@ -45,19 +44,14 @@ MICROSOFT_TEAMS_WEBHOOK=<incoming_webhook_url>
 
 ### Usage
 
-When you want to send a simple notification to you channel, you can easily create a SimpleCard and send it via the TeamsConnector facade
+How to send simple notification look at the readme of this package [sebbmeyer/php-microsoft-teams-connector](https://github.com/sebbmeyer/php-microsoft-teams-connector)
 
-```php
-$card  = new \Sebbmyr\Teams\SimpleCard(['title' => 'Simple card title', 'text' => 'Simple card text']);
-TeamsConnector::send($card);
-```
-
-### Custom card
+### Custom card - ForgeCard
 
 You can create your own cards for every purpose you need, just extend the **AbstractCard** class and implement the `getMessage()` function.
 
 ```php
-\\ Sebbmyr\Teams\Cards\ForgeCard.php
+\\ Sebbmyr\LaravelTeams\Cards\ForgeCard.php
 public function getMessage()
 {
     return [

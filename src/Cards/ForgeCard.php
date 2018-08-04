@@ -1,6 +1,6 @@
 <?php
 
-namespace Sebbmyr\Teams\Cards;
+namespace Sebbmyr\LaravelTeams\Cards;
 
 use Sebbmyr\Teams\AbstractCard as Card;
 
@@ -9,8 +9,8 @@ use Sebbmyr\Teams\AbstractCard as Card;
  */
 class ForgeCard extends Card
 {
-    const STATUS_SUCCESS = '01BC36';
-    const STATUS_ERROR = 'FF0000';
+    const STATUS_SUCCESS = '01BC36'; // success
+    const STATUS_FAILURE = 'FF0000'; // failure
 
     public function getMessage()
     {
@@ -18,7 +18,7 @@ class ForgeCard extends Card
             "@type" => "MessageCard",
             "@context" => "http://schema.org/extensions",
             "summary" => "Forge Card",
-            "themeColor" => ($this->data["status"] === 'success') ? self::STATUS_SUCCESS : self::STATUS_ERROR,
+            "themeColor" => ($this->data["status"] === 'success') ? self::STATUS_SUCCESS : self::STATUS_FAILURE,
             "title" => "Forge deployment message",
             "sections" => [
                 [

@@ -1,5 +1,5 @@
 <?php
-namespace Sebbmyr\Teams\Facades;
+namespace Sebbmyr\LaravelTeams\Facades;
 
 use Illuminate\Support\Facades\Facade as BaseFacade;
 
