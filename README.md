@@ -13,20 +13,28 @@ You can install the package via composer:
 composer require sebbmeyer/laravel-teams-connector
 ```
 
+### Laravel
 If you are using Laravel 5.5 and up, the service provider will automatically get registered.
 
 For older versions of Laravel (<5.5), you have to add the service provider and alias to config/app.php:
 
 ```php
-    Sebbmyr\LaravelTeams\TeamsConnectorServiceProvider::class,
+Sebbmyr\LaravelTeams\TeamsConnectorServiceProvider::class,
 ```
 
 You can optionally use the facade for shorter code. Add this to your facades:
 
 ```php
-    'TeamsConnector' => Sebbmyr\LaravelTeams\Facades\TeamsConnector::class,
+'TeamsConnector' => Sebbmyr\LaravelTeams\Facades\TeamsConnector::class,
 ```
 
+### Lumen
+
+For Lumen usage, the service provider should be registered manually by adding the following line in `bootstrap/app.php`:  
+
+```php
+$app->register(Sebbmyr\LaravelTeams\TeamsConnectorServiceProvider::class);
+```
 
 ### Configuration
 
