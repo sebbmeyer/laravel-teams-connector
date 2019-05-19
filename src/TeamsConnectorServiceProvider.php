@@ -17,22 +17,12 @@ class TeamsConnectorServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $configPath = __DIR__ . '/../config/teams.php';
-        $this->publishes([$configPath => config_path('teams.php')], 'config');
-
-        // Don't boot teams connector if it is not configured.
-        if ($this->stop() === true) {
-            return;
+        if ($this->app instanceof \Illuminate\Foundation\Application) {
+            $configPath = __DIR__ . '/../config/teams.php';
+            $this->publishes([$configPath => config_path('teams.php')], 'config');
         }
-
-        $this->app->bind('TeamsConnector', function () {
-            $webhookUrl = getenv('MICROSOFT_TEAMS_WEBHOOK') ?: $this->app->config->get('teams.webhook', null);
-        
-            return new \Sebbmyr\Teams\TeamsConnector($webhookUrl);
-        });
-        $this->app->alias('TeamsConnector', 'Sebbmyr\Teams\TeamsConnector');
     }
- 
+
     /**
      * Register the application services.
      *
@@ -40,13 +30,25 @@ class TeamsConnectorServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        if ($this->app instanceof \Illuminate\Foundation\Application) {
+            $configPath = __DIR__ . '/../config/teams.php';
+            $this->mergeConfigFrom($configPath, 'teams');
+        } elseif ($this->app instanceof \Laravel\Lumen\Application) {
+            $this->app->configure('teams');
+        }
+
         // Don't register teams connector if it is not configured.
         if ($this->stop() === true) {
             return;
         }
 
-        $configPath = __DIR__ . '/../config/teams.php';
-        $this->mergeConfigFrom($configPath, 'teams');
+        $this->app->bind('TeamsConnector', function () {
+            $webhookUrl = getenv('MICROSOFT_TEAMS_WEBHOOK') ?: $this->app->config->get('teams.webhook', null);
+
+            return new \Sebbmyr\Teams\TeamsConnector($webhookUrl);
+        });
+
+        $this->app->alias('TeamsConnector', 'Sebbmyr\Teams\TeamsConnector');
     }
 
     /**
