@@ -97,6 +97,33 @@ public function getMessage()
 }
 ```
 
+### Custom Card
+
+You can use the `CustomCard` class and dynamically build out our card. [Based on Microsoft Legacy Card](https://docs.microsoft.com/en-us/outlook/actionable-messages/message-card-reference)
+
+#### Available Methods
+- addTitle
+- addText
+- addColor
+- addActivity
+- addFacts
+- addFactsText
+- addImage
+- addImages
+- addAction
+
+```php
+$card = New Sebbmyr\LaravelTeams\Cards\CustomCard('Title Test','Text Test');
+$card->addColor('800080')
+    ->addFactsText('Supported Laravel Versions',['5.x','6.x'])
+    ->addFactsText('Unsupported Laravel Versions',['Before Version 5'])
+    ->addAction('Laravel Website','http://www.laravel.com')
+    ->addFacts('Facts Section',['Fact Name 1' => 'Fact Value 1','Fact Name 2' => 'Fact Value 2']);
+app('TeamsConnector')->send($card);
+```
+
+
+
 ### License
 
 This Microsoft Teams connector for Laravel is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
