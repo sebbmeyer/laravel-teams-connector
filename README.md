@@ -1,6 +1,6 @@
 ## Laravel Microsoft Teams Connector
 
-A Laravel 5 package to send notifications to Microsoft Teams by using "Incoming Webhook". 
+A Laravel 5/6 package to send notifications to Microsoft Teams by using "Incoming Webhook". 
 This package also contains a card to send a Laravel Forge deployment notification, because Microsoft Teams notification is not supported at the moment. The cards in this package only use the old MessageCard format, because AdpativeCard is not supported by Microsoft Teams at the moment. I will update the card format, when AdpativeCard format is supported.
 
 ![Forge card](https://preview.ibb.co/dFzDR8/forge_card.png)
