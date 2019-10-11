@@ -1,6 +1,6 @@
 {
     "name": "sebbmeyer/laravel-teams-connector",
-    "description": "Microsoft Teams Connector for Laravel 5",
+    "description": "Microsoft Teams Connector for Laravel 5/6",
     "keywords": ["laravel", "teams", "microsoft", "connectors", "connector", "messagecard"],
     "license": "MIT",
     "authors": [
@@ -11,7 +11,7 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "illuminate/support": "5.0.x|5.1.x|5.2.x|5.3.x|5.4.x|5.5.x|5.6.x|5.7.x|5.8.x",
+        "illuminate/support": "5.0.x|5.1.x|5.2.x|5.3.x|5.4.x|5.5.x|5.6.x|5.7.x|5.8.x|6.x",
         "sebbmeyer/php-microsoft-teams-connector": "0.1.*"
     },
     "autoload": {
